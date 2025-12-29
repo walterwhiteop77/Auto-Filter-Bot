@@ -24,7 +24,7 @@ BOT_TOKEN = environ.get('BOT_TOKEN', '')
 ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '6725874739').split()]
 USERNAME = environ.get('USERNAME', "@eren645")
 LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1003546511214'))
-MOVIE_GROUP_LINK = environ.get('MOVIE_GROUP_LINK', 'https://t.me/LuciferCinema')
+MOVIE_GROUP_LINK = environ.get('MOVIE_GROUP_LINK', '')
 
 # Pics 
 
@@ -39,10 +39,10 @@ FILES_LIMIT = int(environ.get("FREE_FILES", "3")) #No. of File User Gets In Free
 
 # Database Settings
 
-DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://@cluster0.mongodb.net/?retryWrites=true&w=majority")
-FILES_DATABASE_URL = environ.get('FILES_DATABASE_URL', "mongodb+srv://@cluster0.mongodb.net/?retryWrites=true&w=majority") # For Files
+DATABASE_URI = environ.get('DATABASE_URI', "")
+FILES_DATABASE_URL = environ.get('FILES_DATABASE_URL', "") # For Files
 SECOND_FILES_DATABASE_URL = environ.get('SECOND_FILES_DATABASE_URL', "") # 2nd DB For Files
-DATABASE_NAME = environ.get('DATABASE_NAME', "Silicon")
+DATABASE_NAME = environ.get('DATABASE_NAME', "Cluster0")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Silicon_Files')
 
 # Verify/Shortlink Settings 
@@ -50,18 +50,18 @@ COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Silicon_Files')
 IS_VERIFY = is_enabled('IS_VERIFY', True)
 LOG_VR_CHANNEL = int(environ.get('LOG_VR_CHANNEL', ''))
 LOG_API_CHANNEL = int(environ.get('LOG_API_CHANNEL', ''))
-TUTORIAL = environ.get("TUTORIAL", "https://t.me/Silicon_Bot_Update")
-TUTORIAL2 = environ.get("TUTORIAL2", "https://t.me/Silicon_Bot_Update")
-TUTORIAL3 = environ.get("TUTORIAL3", "https://t.me/Silicon_Bot_Update")
+TUTORIAL = environ.get("TUTORIAL", "https://t.me/tutorial_filx/7")
+TUTORIAL2 = environ.get("TUTORIAL2", "https://t.me/tutorial_filx/5")
+TUTORIAL3 = environ.get("TUTORIAL3", "https://t.me/tutorial_filx/7")
 VERIFY_IMG = environ.get("VERIFY_IMG", "https://graph.org/file/1669ab9af68eaa62c3ca4.jpg")
-SHORTENER_API = environ.get("SHORTENER_API", "5bb6e402dd86fb8774690a5f4a65d2a2c0c04877")
-SHORTENER_WEBSITE = environ.get("SHORTENER_WEBSITE", 'shortslink.in')
-SHORTENER_API2 = environ.get("SHORTENER_API2", "41a89e7a1f16e7dbec0ee52d743f3b5a38a09613")
-SHORTENER_WEBSITE2 = environ.get("SHORTENER_WEBSITE2", 'shortslink2.com')
-SHORTENER_API3 = environ.get("SHORTENER_API3", "f287e7e9b1a23c34f542f77787d39607cae36a4d")
-SHORTENER_WEBSITE3 = environ.get("SHORTENER_WEBSITE3", 'shortslink3.online')
-TWO_VERIFY_GAP = int(environ.get('TWO_VERIFY_GAP', "14400"))
-THREE_VERIFY_GAP = int(environ.get('THREE_VERIFY_GAP', "14400"))
+SHORTENER_API = environ.get("SHORTENER_API", "f9da968c27a8594f2bbc3b2cd1e8778fa756b3a5")
+SHORTENER_WEBSITE = environ.get("SHORTENER_WEBSITE", 'https://linkverify.vercel.app/api')
+SHORTENER_API2 = environ.get("SHORTENER_API2", "3adca196c74366f9d2991580d3fc459015b8ae36")
+SHORTENER_WEBSITE2 = environ.get("SHORTENER_WEBSITE2", 'https://linkverify.vercel.app/api')
+SHORTENER_API3 = environ.get("SHORTENER_API3", "f9da968c27a8594f2bbc3b2cd1e8778fa756b3a5")
+SHORTENER_WEBSITE3 = environ.get("SHORTENER_WEBSITE3", 'https://linkverify.vercel.app/api')
+TWO_VERIFY_GAP = int(environ.get('TWO_VERIFY_GAP', "1200"))
+THREE_VERIFY_GAP = int(environ.get('THREE_VERIFY_GAP', "7200"))
 
 # Force Subscribe Settings 
 

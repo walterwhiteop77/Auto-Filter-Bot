@@ -1,4 +1,5 @@
 import logging
+import httpx
 from pyrogram.errors import InputUserDeactivated, UserNotParticipant, FloodWait, UserIsBlocked, ChatAdminRequired, PeerIdInvalid
 from info import LONG_IMDB_DESCRIPTION, IS_VERIFY, START_IMG, LOG_CHANNEL, DELETE_TIME
 from imdb import Cinemagoer
@@ -299,23 +300,38 @@ def list_to_str(k):
 
 async def get_shortlink(link, grp_id, is_second_shortener=False, is_third_shortener=False):
     settings = await get_settings(grp_id)
-    
-    if IS_VERIFY:
-        if is_third_shortener:             
-            api, site = settings['api_three'], settings['shortner_three']
-        else:
-            if is_second_shortener:
-                api, site = settings['api_two'], settings['shortner_two']
-            else:
-                api, site = settings['api'], settings['shortner']
-        
+
+    # Select API and site based on flags
+    if is_third_shortener:
+        api, site = settings['api_three'], settings['shortner_three']
+    elif is_second_shortener:
+        api, site = settings['api_two'], settings['shortner_two']
+    else:
+        api, site = settings['api'], settings['shortner']
+
+    try:
+        # Try Shortzy method first
         shortzy = Shortzy(api, site)
+        return await shortzy.convert(link)
+    except Exception as e:
+        print(f"Shortzy failed: {e}, trying universal method...")
+
+        # Universal HTTP fallback
         try:
-            link = await shortzy.convert(link)
-        except Exception as e:
-            link = await shortzy.get_quick_link(link)
-    
-    return link 
+            async with httpx.AsyncClient() as client:
+                resp = await client.get(site, params={"api": api, "url": link}, timeout=15)
+                data = resp.json()
+                print("Universal shortener response:", data)
+            
+            if isinstance(data, dict):
+                for key in ["shortenedUrl", "shorturl", "short", "url"]:
+                    if key in data:
+                        return data[key]
+
+            return link  # fallback to original link if nothing works
+        except Exception as e2:
+            print(f"Universal fallback failed: {e2}")
+            return link
 
 def get_file_id(message: "Message") -> Any:
     media_types = (
